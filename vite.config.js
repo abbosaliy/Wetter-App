@@ -1,3 +1,3 @@
 export default {
-  base: "/modul-8/",
+  base: "/Wetter-App/",
 };
