@@ -1,5 +1,6 @@
 import { fetchWeather } from "./api";
 import { removeSpinner, renderSpinner } from "./spinner";
+import { sunnHour } from "./utils";
 
 const wearherAppEl = document.getElementById("app");
 
@@ -150,33 +151,46 @@ function daysAstroInfo(weatherData) {
       <div class="weather-footer">
           <div class="weather-footer__left">
             <p class="weather-footer__left-text">Feuchtigkeit</p>
-            <span class="weather-footer__left-info">${dayInfo.forecast.forecastday[0].day.avghumidity}%</span>
+            <span class="weather-footer__left-info">${
+              dayInfo.current.humidity
+            }%</span>
           </div>
           <div class="weather-footer__right">
             <p class="weather-footer__right-text">Gefühlt</p>
-            <span class="weather-footer__right-info">${dayInfo.forecast.forecastday[0].day.avgtemp_c}°</span>
+            <span class="weather-footer__right-info">${
+              dayInfo.current.feelslike_c
+            }°</span>
           </div>
       </div>
+      
 
       <div class="weather-footer">
           <div class="weather-footer__left">
             <p class="weather-footer__left-text">Sonnenaufgang</p>
-            <span class="weather-footer__left-info">${dayInfo.forecast.forecastday[0].astro.sunrise}</span>
+            <span class="weather-footer__left-info">${sunnHour(
+              dayInfo.forecast.forecastday[0].astro.sunrise
+            )} Uhr</span>
           </div>
           <div class="weather-footer__right">
             <p class="weather-footer__right-text">Sonnenuntergang</p>
-            <span class="weather-footer__right-info">${dayInfo.forecast.forecastday[0].astro.sunset}</span>
+            <span class="weather-footer__right-info">${sunnHour(
+              dayInfo.forecast.forecastday[0].astro.sunset
+            )} Uhr</span>
           </div>
       </div>
 
       <div class="weather-footer">
           <div class="weather-footer__left">
             <p class="weather-footer__left-text">Niederschlag</p>
-            <span class="weather-footer__left-info">${dayInfo.forecast.forecastday[0].day.totalprecip_mm}mm</span>
+            <span class="weather-footer__left-info">${
+              dayInfo.current.precip_mm
+            }mm</span>
           </div>
           <div class="weather-footer__right">
             <p class="weather-footer__right-text">UV-Index</p>
-            <span class="weather-footer__right-info">${dayInfo.forecast.forecastday[0].day.uv}</span>
+            <span class="weather-footer__right-info">${
+              dayInfo.current.uv
+            }</span>
           </div>
       </div>
   `;
