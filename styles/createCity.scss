@@ -6,7 +6,7 @@
   flex-direction: column;
   align-items: center;
   margin-top: 4rem;
-
+ 
   &__title {
     font-size: 2rem;
     font-weight: 400;
@@ -30,7 +30,7 @@
   margin-top: 3rem;
   padding: 1.5rem;
   display: flex;
-  background-color: #394759;
+  backdrop-filter: blur(50px);
   flex-direction: column;
   box-shadow: 1px 1px 5px #0000004d;
 
@@ -75,7 +75,8 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: $colorBox;
+  backdrop-filter: blur(50px);
+  box-shadow: 1px 1px 5px #0000004d;
   border-radius: 6px;
   margin-top: 2rem;
   padding: 1.5rem;
@@ -111,7 +112,6 @@
   flex-direction: column;
   gap: 1.5rem;
   margin-top: 2rem;
-
 }
 .weather-footer {
   display: grid;
@@ -119,7 +119,6 @@
   gap: 1.5rem;
 
   &__left {
-    background-color: $colorBox;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -139,7 +138,6 @@
   }
 
   &__right {
-    background-color: $colorBox;
     display: flex;
     flex-direction: column;
     align-items: center;

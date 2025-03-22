@@ -20,7 +20,6 @@ body {
 }
 
 .wetter-app {
-  padding: 1rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -28,7 +27,18 @@ body {
   background: $background;
   color: $text-color;
   font-family: "Inter", sans-serif;
+
   @include phoneScreens() {
     width: 450px;
   }
 }
+
+.city-mainbox {
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+

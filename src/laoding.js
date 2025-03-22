@@ -1,6 +1,7 @@
 import { fetchWeather } from "./api";
+import { getConditionImagePath } from "./condition";
 import { removeSpinner, renderSpinner } from "./spinner";
-import { sunnHour } from "./utils";
+import { formattemperature, sunnHour } from "./utils";
 
 const wearherAppEl = document.getElementById("app");
 
@@ -20,6 +21,7 @@ export async function getCityName(cityName) {
     renderHours(weatherData);
     renderNextThreeDays(weatherData);
     daysAstroInfo(weatherData);
+    conditionImage(weatherData);
   }, 100);
 
   displayWeather(cityWeatherData);
@@ -37,31 +39,49 @@ function renderWeather(weatherData) {
   };
 }
 
+function conditionImage(data) {
+  const containerEl = document.querySelector(".city-mainbox");
+  const containerImage = getConditionImagePath(
+    data.current.condition.code,
+    data.current.is_day !== 1
+  );
+
+  if (containerImage) {
+    containerEl.style.backgroundImage = `url(${containerImage})`;
+  }
+}
+
 function displayWeather(weatherData) {
   wearherAppEl.innerHTML += `
-    <div class="create-city">
-        <h2 class="create-city__title">${weatherData.cityName}</h2>
-        <h1 class="create-city__temp" >${weatherData.temperature}</h1>
-        <p class="create-city__condition">${weatherData.condition}</p>
-        <div class="create-city__temperature">
-          <span>H:${weatherData.maxTemp}°</span>
-          <span>T:${weatherData.mintemp}°</span>
+    <div class="city-mainbox ">
+        <div class="create-city">
+            <h2 class="create-city__title">${weatherData.cityName}</h2>
+            <h1 class="create-city__temp" >${formattemperature(
+              weatherData.temperature
+            )}</h1>
+            <p class="create-city__condition">${weatherData.condition}</p>
+            <div class="create-city__temperature">
+              <span>H:${weatherData.maxTemp}°</span>
+              <span>T:${weatherData.mintemp}°</span>
+            </div>
         </div>
-    </div>
 
-    <div class="forecast-box">
-      <div class="forecast-box__today">
-        <p class="forecast-box__text">Heute ${weatherData.conditionDay}.</p>
-        <p class="forecast-box__text">Wind bis zum ${weatherData.maxWind}km/h.</p>
-      </div>
-      <div class="forecast-box__time"></div>
-    </div>
+        <div class="forecast-box">
+          <div class="forecast-box__today">
+            <p class="forecast-box__text">Heute ${weatherData.conditionDay}.</p>
+            <p class="forecast-box__text">Wind bis zum ${
+              weatherData.maxWind
+            }km/h.</p>
+          </div>
+          <div class="forecast-box__time"></div>
+        </div>
 
-    <div class="forecast-weekday">
-      <p class="forecast-weekday__text" >Vorhersage für die nächsten 3 Tage:</p>
-    </div>
+        <div class="forecast-weekday">
+          <p class="forecast-weekday__text" >Vorhersage für die nächsten 3 Tage:</p>
+        </div>
 
-    <div class="forecast-dayInfo"></div>
+        <div class="forecast-dayInfo"></div>
+    </div>      
     `;
 }
 
@@ -163,7 +183,6 @@ function daysAstroInfo(weatherData) {
           </div>
       </div>
       
-
       <div class="weather-footer">
           <div class="weather-footer__left">
             <p class="weather-footer__left-text">Sonnenaufgang</p>
