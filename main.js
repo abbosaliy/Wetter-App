@@ -1,4 +1,6 @@
-import { getCityName } from "./src/laoding";
+import { renderMenue } from "./src/menu";
+
 import "./styles/main.scss";
 
-getCityName("Berlin");
+//getCityName("berlin")
+renderMenue("Berlin");

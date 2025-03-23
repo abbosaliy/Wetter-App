@@ -16,7 +16,9 @@ export async function getCityName(cityName) {
   const cityWeatherData = renderWeather(weatherData);
 
   gethours(weatherData);
+
   renderWeather(weatherData);
+
   setTimeout(() => {
     renderHours(weatherData);
     renderNextThreeDays(weatherData);
@@ -41,6 +43,7 @@ function renderWeather(weatherData) {
 
 function conditionImage(data) {
   const containerEl = document.querySelector(".city-mainbox");
+
   const containerImage = getConditionImagePath(
     data.current.condition.code,
     data.current.is_day !== 1
