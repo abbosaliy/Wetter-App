@@ -1,12 +1,32 @@
 @use "variables" as *;
 
+.city-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+
+
+  &__return{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+
+  &__favoriten{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+}
+
 .create-city {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 4rem;
- 
+
   &__title {
     font-size: 2rem;
     font-weight: 400;
@@ -144,7 +164,7 @@
     padding: 1rem;
     gap: 1.5rem;
     backdrop-filter: blur(50px);
- 
+
     border-radius: $border;
     box-shadow: $box-shadow;
 
