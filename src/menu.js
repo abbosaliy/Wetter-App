@@ -7,7 +7,6 @@ import { formattemperature } from "./utils";
 const wearherAppEl = document.getElementById("app");
 
 export async function renderMenue(cityName) {
-
   menuSpinner();
   const weatherData = await fetchWeather(cityName);
 
@@ -35,7 +34,11 @@ function returnMenu() {
 
 window.returnMenu = returnMenu;
 
+function favoriten() {
+  alert("aktuell keine  Function");
+}
 
+window.favoriten = favoriten;
 
 function clickCity(cityName) {
   const cityNameEl = document.querySelectorAll(".city-content");
