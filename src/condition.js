@@ -1,6 +1,6 @@
 export function getConditionImagePath(code, isNight = false) {
   const condition = CONDITION_IMAGES.find((cond) => cond.code === code);
-  console.log(condition);
+
   if (!condition) return null;
 
   return (

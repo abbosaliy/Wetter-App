@@ -1,5 +1,6 @@
 import { fetchWeather } from "./api";
 import { getConditionImagePath } from "./condition";
+
 import { removeSpinner, renderSpinner } from "./spinner";
 import { formattemperature, sunnHour } from "./utils";
 
@@ -11,6 +12,7 @@ export async function getCityName(cityName) {
   const weatherData = await fetchWeather(cityName);
 
   console.log(weatherData);
+  
   removeSpinner();
 
   const cityWeatherData = renderWeather(weatherData);
@@ -54,12 +56,12 @@ function conditionImage(data) {
   }
 }
 
-
 function displayWeather(weatherData) {
   wearherAppEl.innerHTML += `
-    <div class="city-mainbox ">
+    <div class="city-mainbox" id="city">
+
         <div class="city-buttons">
-            <div class="city-buttons__return">
+            <div class="city-buttons__return" onclick="returnMenu()">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -76,7 +78,7 @@ function displayWeather(weatherData) {
                 </svg>
             </div>
 
-            <div class="city-buttons__favoriten">
+            <div class="city-buttons__favoriten"  onclick="favoriten()">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -129,7 +131,7 @@ function displayWeather(weatherData) {
 function gethours(weatherData) {
   const locatTime = weatherData.location.localtime_epoch * 1000;
   const time = new Date(locatTime).getHours();
-  console.log(time);
+
 
   return time;
 }

@@ -6,12 +6,11 @@ import { formattemperature } from "./utils";
 
 const wearherAppEl = document.getElementById("app");
 
-
-
-
 export async function renderMenue(cityName) {
+
   menuSpinner();
   const weatherData = await fetchWeather(cityName);
+
   console.log(weatherData);
 
   setTimeout(() => {
@@ -27,6 +26,15 @@ export async function renderMenue(cityName) {
   });
 }
 
+//Zuruck zur menu function
+
+function returnMenu() {
+  wearherAppEl.innerHTML = "";
+  renderMenue("Bonn");
+}
+
+window.returnMenu = returnMenu;
+
 
 
 function clickCity(cityName) {
@@ -38,9 +46,6 @@ function clickCity(cityName) {
     });
   });
 }
-
-
-
 
 function menuHeader() {
   return `
@@ -62,7 +67,6 @@ function menuHeader() {
 }
 
 function conditionImageMenu(data) {
-  
   const containerEl = document.querySelector(".city-info");
 
   const containerImage = getConditionImagePath(
