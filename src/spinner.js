@@ -1,12 +1,15 @@
 const wearherAppEl = document.getElementById("app");
 
-export function renderSpinner(cityName) {
-  wearherAppEl.innerHTML = spinner(cityName);
-}
+export function renderSpinnerRemove(m) {
+  const spinnerIdel = document.getElementById("spinner");
 
-function spinner(cityName) {
-  return `
-      <div class="spinner">
+  if (spinnerIdel) {
+    spinnerIdel.remove();
+  }
+}
+export function LoadingSpinnerHtml(cityName) {
+  wearherAppEl.innerHTML += `
+      <div id="spinner" class="spinner">
           <div class="spinner-text">Lade wetter für ${cityName}</div>
           <div class="lds-ring">
             <div></div>
@@ -15,14 +18,6 @@ function spinner(cityName) {
             <div></div>
           </div>
       </div>`;
-}
-
-export function removeSpinner() {
-  const spinnerEl = document.querySelector(".spinner");
-
-  if (spinnerEl) {
-    spinnerEl.remove();
-  }
 }
 
 export function removeSpinnerMenue() {

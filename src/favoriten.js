@@ -1,72 +1,34 @@
-import { fetchWeather } from "./api";
+import { menuHeader } from "../main";
+import { handleCityData } from "./addCity";
 import { getConditionImagePath } from "./condition";
-import { getCityName } from "./createcity";
-import { menuSpinner, removeSpinnerMenue } from "./spinner";
+import { getSavedCity, saveToLocalStorage } from "./localStorage";
 import { formattemperature } from "./utils";
 
 const wearherAppEl = document.getElementById("app");
 
-export async function renderMenue(cityName) {
-  menuSpinner();
-  const weatherData = await fetchWeather(cityName);
+//TODU:1
 
-  console.log(weatherData);
+export function saveFavoritenCity(weatherData) {
+  
+  saveToLocalStorage(weatherData);
 
-  setTimeout(() => {
-    wearherAppEl.innerHTML += `
-    ${menuHeader()}
-    ${renderCity(weatherData)}
- 
+  let currentCity = getSavedCity();
+
+  wearherAppEl.innerHTML += `
+    ${renderCity(currentCity)}
     `;
 
-    removeSpinnerMenue();
-    conditionImageMenu(weatherData);
-    clickCity(cityName);
-  });
+  clickCity(currentCity);
+  conditionImageMenu(currentCity);
 }
 
-//Zuruck zur menu function
-
-function returnMenu() {
-  wearherAppEl.innerHTML = "";
-  renderMenue("Bonn");
-}
-
-window.returnMenu = returnMenu;
-
-function favoriten() {
-  alert("aktuell keine  Function");
-}
-
-window.favoriten = favoriten;
-
-function clickCity(cityName) {
+function clickCity(weatherData) {
   const cityNameEl = document.querySelectorAll(".city-content");
-
   cityNameEl.forEach((city) => {
     city.addEventListener("click", () => {
-      getCityName(cityName);
+      handleCityData(weatherData);
     });
   });
-}
-
-function menuHeader() {
-  return `
-      <div class="header-app">
-          <div class="header-app__nav">
-              <h2 class="header-app__nav-text">Wetter</h2>
-              <button class="header-app__nav-button">Bearbeiten</button>
-          </div>
-          <div class="header-app__search">
-              <input
-                class="header-app__search-input"
-                autocomplete="off"
-                type="text"
-                placeholder="Nach stadt suchen"
-              />
-          </div>
-      </div>
-  `;
 }
 
 function conditionImageMenu(data) {

@@ -1,48 +1,27 @@
-import { fetchWeather } from "./api";
+import { menuHeader } from "../main";
 import { getConditionImagePath } from "./condition";
+import { saveFavoritenCity } from "./favoriten";
 
-import { removeSpinner, renderSpinner } from "./spinner";
 import { formattemperature, sunnHour } from "./utils";
 
 const wearherAppEl = document.getElementById("app");
 
-export async function getCityName(cityName) {
-  renderSpinner(cityName);
+export async function handleCityData(weatherData) {
+  //TODU:5- city daten holen und verteilen
 
-  const weatherData = await fetchWeather(cityName);
+  wearherAppEl.innerHTML = "";
 
   console.log(weatherData);
-  
-  removeSpinner();
 
-  const cityWeatherData = renderWeather(weatherData);
-
+  displayWeather(weatherData);
   gethours(weatherData);
-
-  renderWeather(weatherData);
-
-  setTimeout(() => {
-    renderHours(weatherData);
-    renderNextThreeDays(weatherData);
-    daysAstroInfo(weatherData);
-    conditionImage(weatherData);
-  }, 100);
-
-  displayWeather(cityWeatherData);
+  renderHours(weatherData);
+  renderNextThreeDays(weatherData);
+  daysAstroInfo(weatherData);
+  conditionImage(weatherData);
 }
 
-function renderWeather(weatherData) {
-  return {
-    cityName: weatherData.location.name,
-    temperature: weatherData.current.temp_c,
-    condition: weatherData.current.condition.text,
-    maxTemp: weatherData.forecast.forecastday[0].day.maxtemp_c,
-    mintemp: weatherData.forecast.forecastday[0].day.mintemp_c,
-    conditionDay: weatherData.forecast.forecastday[0].day.condition.text,
-    maxWind: weatherData.forecast.forecastday[0].day.maxwind_kph,
-  };
-}
-
+//TODU:6 richtige wetter situation uberprüfen und passende bild für hintergrund hinzufugen
 function conditionImage(data) {
   const containerEl = document.querySelector(".city-mainbox");
 
@@ -56,12 +35,13 @@ function conditionImage(data) {
   }
 }
 
+//TODU:7 -  alle city Wetter daten foront seite hinzüfugen
+
 function displayWeather(weatherData) {
   wearherAppEl.innerHTML += `
-    <div class="city-mainbox" id="city">
-
+    <div class="city-mainbox">
         <div class="city-buttons">
-            <div class="city-buttons__return" onclick="returnMenu()">
+            <div class="city-buttons__return">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -78,7 +58,7 @@ function displayWeather(weatherData) {
                 </svg>
             </div>
 
-            <div class="city-buttons__favoriten"  onclick="favoriten()">
+            <div class="city-buttons__favoriten">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -98,22 +78,30 @@ function displayWeather(weatherData) {
 
 
         <div class="create-city">
-            <h2 class="create-city__title">${weatherData.cityName}</h2>
+            <h2 class="create-city__title">${weatherData.location.name}</h2>
             <h1 class="create-city__temp" >${formattemperature(
-              weatherData.temperature
+              weatherData.current.temp_c
             )}</h1>
-            <p class="create-city__condition">${weatherData.condition}</p>
+            <p class="create-city__condition">${
+              weatherData.current.condition.text
+            }</p>
             <div class="create-city__temperature">
-              <span>H:${weatherData.maxTemp}°</span>
-              <span>T:${weatherData.mintemp}°</span>
+                <span>H:${
+                  weatherData.forecast.forecastday[0].day.maxtemp_c
+                }°</span>
+                <span>T:${
+                  weatherData.forecast.forecastday[0].day.mintemp_c
+                }°</span>
             </div>
         </div>
 
         <div class="forecast-box">
           <div class="forecast-box__today">
-            <p class="forecast-box__text">Heute ${weatherData.conditionDay}.</p>
+            <p class="forecast-box__text">Heute ${
+              weatherData.forecast.forecastday[0].day.condition.text
+            }.</p>
             <p class="forecast-box__text">Wind bis zum ${
-              weatherData.maxWind
+              weatherData.forecast.forecastday[0].day.maxwind_kph
             }km/h.</p>
           </div>
           <div class="forecast-box__time"></div>
@@ -126,16 +114,31 @@ function displayWeather(weatherData) {
         <div class="forecast-dayInfo"></div>
     </div>      
     `;
+
+  const returnBtnEl = wearherAppEl.querySelector(".city-buttons__return");
+  const favoritenBtnEl = wearherAppEl.querySelector(".city-buttons__favoriten");
+
+  returnBtnEl.addEventListener("click", returnMenu);
+  favoritenBtnEl.addEventListener("click", () => {
+    saveFavoritenCity(weatherData);
+   
+  });
 }
 
+//TODU:8- zurük zum haupmenu button Fn
+function returnMenu() {
+  wearherAppEl.innerHTML = "";
+  menuHeader();
+}
+
+//TODU:9- zeit einstellin EU zeit zone
 function gethours(weatherData) {
   const locatTime = weatherData.location.localtime_epoch * 1000;
   const time = new Date(locatTime).getHours();
 
-
   return time;
 }
-
+//:10- 24 uhr zeit anzeige FN aber gits hier probleme
 function renderHours(weatherData) {
   const hour = gethours(weatherData);
 
@@ -176,6 +179,7 @@ function renderHours(weatherData) {
   }
 }
 
+//TODU:11- nechste 3 tagige wetter info anzeige Fn
 function renderNextThreeDays(weatherData) {
   for (let i = 0; i < 3; i++) {
     let day = weatherData.forecast.forecastday[i];
@@ -206,6 +210,7 @@ function renderNextThreeDays(weatherData) {
   }
 }
 
+//TUDO:12- astro info anzeige Fn
 function daysAstroInfo(weatherData) {
   const dayInfo = weatherData;
   const forecastDayEl = document.querySelector(".forecast-dayInfo");

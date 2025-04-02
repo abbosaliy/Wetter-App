@@ -3,9 +3,7 @@
 .city-content {
   display: flex;
   align-items: center;
-
 }
-
 
 .city-info {
   display: flex;
@@ -22,7 +20,6 @@
   background-repeat: no-repeat;
   background-size: cover;
   cursor: pointer;
- 
 
   &__left {
     display: flex;
@@ -48,3 +45,4 @@
     }
   }
 }
+
