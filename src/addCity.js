@@ -31,7 +31,7 @@ function conditionImage(data) {
   );
 
   if (containerImage) {
-    containerEl.style.backgroundImage = `url(${containerImage})`;
+    containerEl.style.backgroundImage = `linear-gradient(0deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url(${containerImage})`;
   }
 }
 
@@ -121,7 +121,6 @@ function displayWeather(weatherData) {
   returnBtnEl.addEventListener("click", returnMenu);
   favoritenBtnEl.addEventListener("click", () => {
     saveFavoritenCity(weatherData);
-   
   });
 }
 
