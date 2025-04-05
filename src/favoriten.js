@@ -9,15 +9,14 @@ const wearherAppEl = document.getElementById("app");
 //TODU:1
 
 export function saveFavoritenCity(weatherData) {
-  
   saveToLocalStorage(weatherData);
 
-  let currentCity = getSavedCity();
+  const savedCity = getSavedCity();
+  const currentCity = savedCity[savedCity.length - 1];
 
   wearherAppEl.innerHTML += `
-    ${renderCity(currentCity)}
-    `;
-
+ ${renderCity(currentCity)}
+ `;
   clickCity(currentCity);
   conditionImageMenu(currentCity);
 }

@@ -81,7 +81,7 @@ function displayWeather(weatherData) {
             <h2 class="create-city__title">${weatherData.location.name}</h2>
             <h1 class="create-city__temp" >${formattemperature(
               weatherData.current.temp_c
-            )}</h1>
+            )}°</h1>
             <p class="create-city__condition">${
               weatherData.current.condition.text
             }</p>

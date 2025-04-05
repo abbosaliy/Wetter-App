@@ -1,14 +1,13 @@
 import { fetchWeatherData, searchCityInAPI } from "./src/api";
 import { handleCityData } from "./src/addCity";
 
-
 import "./styles/main.scss";
+
 const wearherAppEl = document.getElementById("app");
 
 // TODU:1 haupt html und suche teile
 export function menuHeader() {
   wearherAppEl.innerHTML = ` 
-  
       <div class="header-app">
           <div class="header-app__nav">
               <h2 class="header-app__nav-text">Wetter</h2>
@@ -26,6 +25,10 @@ export function menuHeader() {
 
           <div id="suggestions" class="header-app__cityListe">
            
+          </div>
+
+          <div id="favoriten">
+            Noch keine Favoriten gespeichert.
           </div>
           
       </div>
@@ -52,8 +55,7 @@ export function menuHeader() {
   searchInputEl.addEventListener("input", searchCity);
 
   function displayCities(citiesData) {
-
-    //TODU:3 gefundene city 
+    //TODU:3 gefundene city
 
     if (!citiesData) return;
 
@@ -78,7 +80,7 @@ export function menuHeader() {
 async function getWeatherById(cityId) {
   const cityWeatherDataForecast = await fetchWeatherData(cityId);
 
-  //TODU:4 - ausgewelte city  daten von der API holen über Id un übergeben 
+  //TODU:4 - ausgewelte city  daten von der API holen über Id un übergeben
   handleCityData(cityWeatherDataForecast);
 
   console.log(cityWeatherDataForecast);
