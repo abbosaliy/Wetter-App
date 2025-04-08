@@ -1,50 +1,27 @@
-import { menuHeader } from "../main";
+import { wearherAppEl } from "../main";
 import { handleCityData } from "./addCity";
 import { getConditionImagePath } from "./condition";
-import { getSavedCity, saveToLocalStorage } from "./localStorage";
+import { saveToLocalStorage, getSavedCity } from "./localStorage";
 import { formattemperature } from "./utils";
-
-const wearherAppEl = document.getElementById("app");
 
 //TODU:1
 
-export function saveFavoritenCity(weatherData) {
-  saveToLocalStorage(weatherData);
+export function saveFavoritenCity(weatherData, cityId) {
+  console.log(weatherData, cityId);
 
+  const currentCity = weatherData;
+  renderCity();
+  saveToLocalStorage(currentCity);
+}
+
+
+
+export function renderCity() {
   const savedCity = getSavedCity();
-  const currentCity = savedCity[savedCity.length - 1];
+  let html = "";
 
-  wearherAppEl.innerHTML += `
- ${renderCity(currentCity)}
- `;
-  clickCity(currentCity);
-  conditionImageMenu(currentCity);
-}
-
-function clickCity(weatherData) {
-  const cityNameEl = document.querySelectorAll(".city-content");
-  cityNameEl.forEach((city) => {
-    city.addEventListener("click", () => {
-      handleCityData(weatherData);
-    });
-  });
-}
-
-function conditionImageMenu(data) {
-  const containerEl = document.querySelector(".city-info");
-
-  const containerImage = getConditionImagePath(
-    data.current.condition.code,
-    data.current.is_day !== 1
-  );
-
-  if (containerImage) {
-    containerEl.style.backgroundImage = `url(${containerImage})`;
-  }
-}
-
-function renderCity(data) {
-  return `
+  savedCity.forEach((data) => {
+    html += `
     <div class="city-content">
         <div></div>
         <div class="city-info">
@@ -73,4 +50,7 @@ function renderCity(data) {
         </div>
       </div>
     `;
+  });
+
+  return html;
 }

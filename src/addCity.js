@@ -1,19 +1,18 @@
-import { menuHeader } from "../main";
+import { wearherAppEl } from "../main";
+import { fetchWeatherData } from "./api";
 import { getConditionImagePath } from "./condition";
 import { saveFavoritenCity } from "./favoriten";
+import { renderMainMenu } from "./mainMenu";
+import { laodingSpinner } from "./spinner";
 
 import { formattemperature, sunnHour } from "./utils";
 
-const wearherAppEl = document.getElementById("app");
-
-export async function handleCityData(weatherData) {
+export async function handleCityData(cityName, cityId) {
+  const weatherData = await fetchWeatherData(cityId);
   //TODU:5- city daten holen und verteilen
-
-  wearherAppEl.innerHTML = "";
-
   console.log(weatherData);
 
-  displayWeather(weatherData);
+  displayWeather(weatherData, cityId);
   gethours(weatherData);
   renderHours(weatherData);
   renderNextThreeDays(weatherData);
@@ -37,8 +36,8 @@ function conditionImage(data) {
 
 //TODU:7 -  alle city Wetter daten foront seite hinzüfugen
 
-function displayWeather(weatherData) {
-  wearherAppEl.innerHTML += `
+function displayWeather(weatherData, cityId) {
+  wearherAppEl.innerHTML = `
     <div class="city-mainbox">
         <div class="city-buttons">
             <div class="city-buttons__return">
@@ -120,14 +119,13 @@ function displayWeather(weatherData) {
 
   returnBtnEl.addEventListener("click", returnMenu);
   favoritenBtnEl.addEventListener("click", () => {
-    saveFavoritenCity(weatherData);
+    saveFavoritenCity(weatherData, cityId);
   });
 }
 
 //TODU:8- zurük zum haupmenu button Fn
 function returnMenu() {
-  wearherAppEl.innerHTML = "";
-  menuHeader();
+  renderMainMenu();
 }
 
 //TODU:9- zeit einstellin EU zeit zone
