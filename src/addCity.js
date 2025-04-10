@@ -1,13 +1,13 @@
 import { wearherAppEl } from "../main";
 import { fetchWeatherData } from "./api";
 import { getConditionImagePath } from "./condition";
-import { saveFavoritenCity } from "./favoriten";
-import { renderMainMenu } from "./mainMenu";
+import { saveToLocalStorage } from "./localStorage";
 
+import { renderMainMenu } from "./mainMenu";
 
 import { formattemperature, sunnHour } from "./utils";
 
-export async function handleCityData(cityName, cityId) {
+export async function handleCityData(cityId) {
   const weatherData = await fetchWeatherData(cityId);
   //TODU:5- city daten holen und verteilen
   console.log(weatherData);
@@ -120,7 +120,8 @@ function displayWeather(weatherData, cityId) {
   returnBtnEl.addEventListener("click", returnMenu);
   favoritenBtnEl.addEventListener("click", () => {
     //Hier eine Überprüfung einfügen, ob die cityID schon im lokal Storage orhanden ist. Wenn ja, dann darf saveFavoriteCity nicht ausgeführt werden.
-    saveFavoritenCity(weatherData, cityId);
+    favoritenBtnEl.classList.add("color");
+    saveToLocalStorage(cityId);
   });
 }
 

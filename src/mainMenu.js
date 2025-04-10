@@ -9,6 +9,8 @@ export async function renderMainMenu() {
       ${menuHeader()}
       ${await renderCity()}
     </div>
+
+    
  `;
 
   const searchInputEl = document.getElementById("searchInput");
@@ -24,7 +26,20 @@ export async function renderMainMenu() {
     const citiesData = await searchCityInAPI(cityName);
     console.log(citiesData);
 
-    displayCities(citiesData, sugesstionsEl);
+    displayCities(citiesData, sugesstionsEl, searchInputEl);
+  });
+
+  // favoriten city onclick fn
+  const favoritenEl = document.querySelectorAll(".city-info");
+  favoritenEl.forEach((cityEL) => {
+    cityEL.addEventListener("click", () => {
+      const cityId = cityEL
+        .closest(".city-content")
+        ?.getAttribute("data-city-id");
+      console.log(cityId);
+
+      handleCityData(cityId);
+    });
   });
 }
 // TODU:1 haupt html und suche teile
@@ -54,7 +69,7 @@ export function menuHeader() {
 
 //TODU:2 city suche fn
 
-function displayCities(citiesData, sugesstionsEl) {
+function displayCities(citiesData, sugesstionsEl, searchInputEl) {
   //TODU:3 gefundene city
 
   if (!citiesData) return;
@@ -65,7 +80,6 @@ function displayCities(citiesData, sugesstionsEl) {
     cityListe.classList.add("cityforeeach");
 
     cityListe.innerHTML = `
-
       <p>${index.name}</p> 
       <p>${index.country}</p>`;
 
@@ -73,11 +87,16 @@ function displayCities(citiesData, sugesstionsEl) {
     const cityId = index.id;
     console.log(cityName, cityId);
 
+    sugesstionsEl.appendChild(cityListe);
+
     cityListe.addEventListener("click", function () {
-      handleCityData(cityName, cityId);
-      sugesstionsEl.innerHTML = "";
+      handleCityData(cityId);
     });
 
-    sugesstionsEl.appendChild(cityListe);
+    const appEl = document.getElementById("app");
+    appEl.addEventListener("click", function () {
+      sugesstionsEl.innerHTML = "";
+      searchInputEl = "";
+    });
   });
 }
