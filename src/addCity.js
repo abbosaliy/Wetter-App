@@ -119,6 +119,7 @@ function displayWeather(weatherData, cityId) {
 
   returnBtnEl.addEventListener("click", returnMenu);
   favoritenBtnEl.addEventListener("click", () => {
+    //Hier eine Überprüfung einfügen, ob die cityID schon im lokal Storage orhanden ist. Wenn ja, dann darf saveFavoriteCity nicht ausgeführt werden.
     saveFavoritenCity(weatherData, cityId);
   });
 }
