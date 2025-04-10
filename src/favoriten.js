@@ -1,5 +1,4 @@
-import { wearherAppEl } from "../main";
-import { handleCityData } from "./addCity";
+import { fetchWeatherData } from "./api";
 import { getConditionImagePath } from "./condition";
 import { saveToLocalStorage, getSavedCity } from "./localStorage";
 import { formattemperature } from "./utils";
@@ -11,16 +10,18 @@ export function saveFavoritenCity(weatherData, cityId) {
 
   const currentCity = weatherData;
   renderCity();
-  saveToLocalStorage(currentCity);
+  saveToLocalStorage(cityId);
 }
 
-
-
-export function renderCity() {
+export async function renderCity() {
   const savedCity = getSavedCity();
+  console.log(savedCity);
+
   let html = "";
 
-  savedCity.forEach((data) => {
+  for (const cityId of savedCity) {
+    const data = await fetchWeatherData(cityId);
+
     html += `
     <div class="city-content">
         <div></div>
@@ -50,7 +51,7 @@ export function renderCity() {
         </div>
       </div>
     `;
-  });
+  }
 
   return html;
 }

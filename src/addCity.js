@@ -3,7 +3,7 @@ import { fetchWeatherData } from "./api";
 import { getConditionImagePath } from "./condition";
 import { saveFavoritenCity } from "./favoriten";
 import { renderMainMenu } from "./mainMenu";
-import { laodingSpinner } from "./spinner";
+
 
 import { formattemperature, sunnHour } from "./utils";
 
@@ -197,7 +197,7 @@ function renderNextThreeDays(weatherData) {
      <div class="weekday-box">
         <div class="weekday-box__info">
           <p>${dayData}</p>
-          <img class="weekday-box__icon" src="https:${icon}" alt="" />
+          <img class="weekday-box__icon" src="https:${icon}" alt=""/>
           <p>H:${maxTemp}°</p>
           <p>T:${mintemp}°</p>
           <p>${wind} km/h</p>

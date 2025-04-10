@@ -2,14 +2,12 @@ import { wearherAppEl } from "../main";
 import { handleCityData } from "./addCity";
 import { searchCityInAPI } from "./api";
 import { renderCity } from "./favoriten";
-import { laodingSpinner } from "./spinner";
 
 export async function renderMainMenu() {
   wearherAppEl.innerHTML = `
     <div class="main-menu">
       ${menuHeader()}
-      ${renderCity()}
-    
+      ${await renderCity()}
     </div>
  `;
 
@@ -76,10 +74,8 @@ function displayCities(citiesData, sugesstionsEl) {
     console.log(cityName, cityId);
 
     cityListe.addEventListener("click", function () {
-
       handleCityData(cityName, cityId);
       sugesstionsEl.innerHTML = "";
-      
     });
 
     sugesstionsEl.appendChild(cityListe);

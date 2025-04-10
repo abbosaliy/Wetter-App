@@ -3,7 +3,7 @@ const LOCAL_STORAGE_KEY = "city";
 export function saveToLocalStorage(cityId) {
   const savedCities = getSavedCity();
   if (savedCities.find((city) => city === cityId)) {
-    alert(cityId + "wurde faworiten gespeichert");
+    alert(cityId + "gespeichert");
     return;
   }
 
