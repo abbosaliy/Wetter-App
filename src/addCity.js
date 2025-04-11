@@ -132,8 +132,7 @@ function returnMenu() {
 
 //TODU:9- zeit einstellin EU zeit zone
 function gethours(weatherData) {
-  const locatTime = weatherData.location.localtime_epoch * 1000;
-  const time = new Date(locatTime).getHours();
+  const time = new Date(weatherData.location.localtime).getHours();
 
   return time;
 }
