@@ -2,12 +2,13 @@ import { wearherAppEl } from "../main";
 import { fetchWeatherData } from "./api";
 import { getConditionImagePath } from "./condition";
 import { saveToLocalStorage } from "./localStorage";
-
 import { renderMainMenu } from "./mainMenu";
+import { showSpinnerCity } from "./spinner";
 
 import { formattemperature, sunnHour } from "./utils";
 
-export async function handleCityData(cityId) {
+export async function handleCityData(cityId, cityName) {
+  showSpinnerCity(cityName);
   const weatherData = await fetchWeatherData(cityId);
   //TODU:5- city daten holen und verteilen
   console.log(weatherData);
@@ -30,7 +31,7 @@ function conditionImage(data) {
   );
 
   if (containerImage) {
-    containerEl.style.backgroundImage = `linear-gradient(0deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url(${containerImage})`;
+    containerEl.style.backgroundImage = `linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${containerImage})`;
   }
 }
 
@@ -74,7 +75,6 @@ function displayWeather(weatherData, cityId) {
                 </svg>
             </div>
         </div>
-
 
         <div class="create-city">
             <h2 class="create-city__title">${weatherData.location.name}</h2>

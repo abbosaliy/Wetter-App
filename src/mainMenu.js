@@ -2,8 +2,11 @@ import { wearherAppEl } from "../main";
 import { handleCityData } from "./addCity";
 import { searchCityInAPI } from "./api";
 import { renderCity } from "./favoriten";
+import { showSpinner } from "./spinner";
 
 export async function renderMainMenu() {
+  showSpinner();
+
   const favoritenCity = await renderCity();
 
   let favoritenContent = "";
@@ -17,7 +20,6 @@ export async function renderMainMenu() {
   wearherAppEl.innerHTML = `
     <div class="main-menu">
       ${menuHeader()}
-
     </div>
   
     <div class="favoriten-cities__liste">
@@ -28,29 +30,35 @@ export async function renderMainMenu() {
   const searchInputEl = document.getElementById("searchInput");
   const sugesstionsEl = document.getElementById("suggestions");
 
-  searchInputEl.addEventListener("input", async function () {
-
+  const debounceInput = debounce(async function () {
     const cityName = searchInputEl.value;
     sugesstionsEl.innerHTML = "";
 
     if (cityName.length < 3) return;
 
     sugesstionsEl.classList.remove("display");
-    
+
     const citiesData = await searchCityInAPI(cityName);
-   
+
     displayCities(citiesData, sugesstionsEl);
-  });
+  }, 500);
+
+  searchInputEl.addEventListener("input", debounceInput);
 
   const favoritenEl = document.querySelectorAll(".city-info");
 
   favoritenEl.forEach((cityEL) => {
     cityEL.addEventListener("click", () => {
-      const cityId = cityEL
-        .closest(".city-content")
-        ?.getAttribute("data-city-id");
+      const cityBox = cityEL.closest(".city-content");
 
-      handleCityData(cityId);
+      if (!cityBox) {
+        console.warn("topilmadi");
+      }
+      const cityId = cityBox.getAttribute("data-city-id");
+      const cityName = cityBox.getAttribute("data-city-name");
+
+      console.log(cityId, cityName);
+      handleCityData(cityId, cityName);
     });
   });
 }
@@ -74,7 +82,7 @@ function displayCities(citiesData, sugesstionsEl) {
     sugesstionsEl.appendChild(cityListe);
 
     cityListe.addEventListener("click", function () {
-      handleCityData(cityId);
+      handleCityData(cityId, cityName);
     });
   });
 
@@ -105,4 +113,14 @@ export function menuHeader() {
           </div>
       </div>
   `;
+}
+
+function debounce(fn, delay) {
+  let timeoutId;
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  };
 }
