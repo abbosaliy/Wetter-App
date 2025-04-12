@@ -26,7 +26,7 @@ export async function renderMainMenu() {
     const citiesData = await searchCityInAPI(cityName);
     console.log(citiesData);
 
-    displayCities(citiesData, sugesstionsEl, searchInputEl);
+    displayCities(citiesData, sugesstionsEl);
   });
 
   // favoriten city onclick fn
@@ -61,7 +61,7 @@ export function menuHeader() {
           </div>
 
           <div id="suggestions" class="header-app__cityListe">
-           
+             <em>Noch keine Favoriten gespeichert.</em>
           </div>
       </div>
   `;
@@ -69,7 +69,7 @@ export function menuHeader() {
 
 //TODU:2 city suche fn
 
-function displayCities(citiesData, sugesstionsEl, searchInputEl) {
+function displayCities(citiesData, sugesstionsEl) {
   //TODU:3 gefundene city
 
   if (!citiesData) return;
@@ -96,7 +96,6 @@ function displayCities(citiesData, sugesstionsEl, searchInputEl) {
     const appEl = document.getElementById("app");
     appEl.addEventListener("click", function () {
       sugesstionsEl.innerHTML = "";
-      searchInputEl = "";
     });
   });
 }

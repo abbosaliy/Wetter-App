@@ -120,8 +120,8 @@ function displayWeather(weatherData, cityId) {
   returnBtnEl.addEventListener("click", returnMenu);
   favoritenBtnEl.addEventListener("click", () => {
     //Hier eine Überprüfung einfügen, ob die cityID schon im lokal Storage orhanden ist. Wenn ja, dann darf saveFavoriteCity nicht ausgeführt werden.
-    favoritenBtnEl.classList.add("color");
-    saveToLocalStorage(cityId);
+    favoritenBtnEl.remove();
+    saveToLocalStorage(cityId, weatherData.location.name);
   });
 }
 
@@ -133,7 +133,6 @@ function returnMenu() {
 //TODU:9- zeit einstellin EU zeit zone
 function gethours(weatherData) {
   const time = new Date(weatherData.location.localtime).getHours();
-
   return time;
 }
 //:10- 24 uhr zeit anzeige FN aber gits hier probleme

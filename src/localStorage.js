@@ -1,14 +1,14 @@
 const LOCAL_STORAGE_KEY = "city";
 
-export function saveToLocalStorage(cityId) {
+export function saveToLocalStorage(cityId, cityName) {
   const savedCities = getSavedCity();
-  
-  if (savedCities.find((city) => city === cityId)) {
-    alert(cityId + "gespeichert");
+
+  if (savedCities.includes(String(cityId))) {
+    alert(`${cityName}  wurde zu den Favoriten hinzugefügt.`);
     return;
   }
 
-  savedCities.push(cityId);
+  savedCities.push(String(cityId));
 
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedCities));
 }
