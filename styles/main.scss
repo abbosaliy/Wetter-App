@@ -22,7 +22,6 @@ body {
   }
 }
 
-
 .wetter-app {
   min-height: 100vh;
   display: flex;
@@ -42,4 +41,17 @@ body {
   height: 100%;
   background-position: center;
   background-size: cover;
+}
+
+.favoriten-text {
+  padding-left: 1rem;
+}
+
+.favoriten-cities__liste {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.display {
+  display: none;
 }

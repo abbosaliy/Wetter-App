@@ -1,4 +1,4 @@
-const LOCAL_STORAGE_KEY = "city";
+const LOCAL_STORAGE_KEY = "savedCities";
 
 export function saveToLocalStorage(cityId, cityName) {
   const savedCities = getSavedCity();

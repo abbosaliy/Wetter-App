@@ -4,6 +4,15 @@
   display: flex;
   align-items: center;
 }
+.city-remove {
+  display: flex;
+  align-items: center;
+  padding-left: 0.5rem;
+  width: 45px;
+  filter: drop-shadow(1px 1px 5px #000);
+  cursor: pointer;
+  color: #f13c3c;
+}
 
 .city-info {
   display: flex;
@@ -42,8 +51,4 @@
       font-weight: 250;
     }
   }
-}
-
-.color {
-  display: none;
 }

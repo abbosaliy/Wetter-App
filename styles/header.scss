@@ -50,14 +50,17 @@
     width: 100%;
     background-color: black;
     color: $text-color;
-
     border-radius: 0px 0px 6px 6px;
   }
 }
-.cityforeeach {
+.inputCity-liste {
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
   cursor: pointer;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.display {
+  display: none;
 }
