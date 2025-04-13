@@ -4,6 +4,7 @@
   display: flex;
   align-items: center;
 }
+
 .city-remove {
   display: flex;
   align-items: center;
@@ -17,9 +18,11 @@
     width: 30px;
   }
 }
+
 .city-remove__display {
   display: none;
 }
+
 
 .city-info {
   display: flex;
@@ -41,6 +44,7 @@
     gap: 1.5rem;
 
     &-location {
+      
       h5 {
         font-size: 1.5rem;
         font-weight: 350;

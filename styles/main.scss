@@ -12,6 +12,7 @@
 }
 
 body {
+  
   @include phoneScreens() {
     min-height: 100vh;
     display: flex;

@@ -40,10 +40,6 @@
   flex-direction: column-reverse;
 }
 
-.favoritenDisplayEl {
-  color: yellow;
-}
-
 .create-city {
   width: 100%;
   display: flex;
@@ -160,6 +156,7 @@
   gap: 1.5rem;
   margin-top: 2rem;
 }
+
 .weather-footer {
   display: grid;
   grid-template-columns: 1fr 1fr;

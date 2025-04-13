@@ -9,7 +9,6 @@ export function saveToLocalStorage(cityId, cityName) {
   }
 
   savedCities.push(String(cityId));
-
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedCities));
 }
 

@@ -4,7 +4,6 @@ import { getConditionImagePath } from "./condition";
 import { getSavedCity, saveToLocalStorage } from "./localStorage";
 import { renderMainMenu } from "./mainMenu";
 import { showSpinnerCity } from "./spinner";
-
 import { formattemperature, sunnHour } from "./utils";
 
 export async function handleCityData(cityId, cityName) {
@@ -44,8 +43,7 @@ function displayWeather(weatherData, cityId) {
                   viewBox="0 0 24 24"
                   stroke-width="1.5"
                   stroke="currentColor"
-                  class="size-6">
-                                                                                                                                                                                                                            
+                  class="size-6">                                                                                                                                                                                                      
                   <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -61,7 +59,6 @@ function displayWeather(weatherData, cityId) {
                     stroke-width="1.5"
                     stroke="currentColor"
                     class="size-6">
-                    
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
@@ -73,10 +70,10 @@ function displayWeather(weatherData, cityId) {
         <div class="create-city">
             <h2 class="create-city__title">${weatherData.location.name}</h2>
             <h1 class="create-city__temp" >${formattemperature(
-              weatherData.current.temp_c
+                weatherData.current.temp_c
             )}°</h1>
             <p class="create-city__condition">${
-              weatherData.current.condition.text
+                weatherData.current.condition.text
             }</p>
             <div class="create-city__temperature">
                 <span>H:${
@@ -89,12 +86,12 @@ function displayWeather(weatherData, cityId) {
         </div>
         <div class="forecast-box">
           <div class="forecast-box__today">
-            <p class="forecast-box__text">Heute ${
-              weatherData.forecast.forecastday[0].day.condition.text
-            }.</p>
-            <p class="forecast-box__text">Wind bis zum ${
+              <p class="forecast-box__text">Heute ${
+                weatherData.forecast.forecastday[0].day.condition.text
+              }.</p>
+              <p class="forecast-box__text">Wind bis zum ${
               weatherData.forecast.forecastday[0].day.maxwind_kph
-            }km/h.</p>
+              }km/h.</p>
           </div>
           <div class="forecast-box__time"></div>
         </div>
@@ -222,7 +219,6 @@ function daysAstroInfo(weatherData) {
             }°</span>
           </div>
       </div>
-      
       <div class="weather-footer">
           <div class="weather-footer__left">
             <p class="weather-footer__left-text">Sonnenaufgang</p>
@@ -237,7 +233,6 @@ function daysAstroInfo(weatherData) {
             )} Uhr</span>
           </div>
       </div>
-
       <div class="weather-footer">
           <div class="weather-footer__left">
             <p class="weather-footer__left-text">Niederschlag</p>
