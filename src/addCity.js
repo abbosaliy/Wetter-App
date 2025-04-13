@@ -12,8 +12,6 @@ export async function handleCityData(cityId, cityName) {
 
   const weatherData = await fetchWeatherData(cityId);
 
-  console.log(weatherData);
-
   displayWeather(weatherData, cityId);
   gethours(weatherData);
   renderHours(weatherData);
@@ -174,6 +172,7 @@ function renderHours(weatherData) {
 }
 
 function renderNextThreeDays(weatherData) {
+  
   for (let i = 0; i < 3; i++) {
     let day = weatherData.forecast.forecastday[i];
     let data = new Date(day.date);

@@ -2,7 +2,7 @@ import { wearherAppEl } from "../main";
 import { handleCityData } from "./addCity";
 import { searchCityInAPI } from "./api";
 import { renderCity } from "./favoriten";
-import { removeCityLocalStorage } from "./localStorage";
+import { getSavedCity, removeCityLocalStorage } from "./localStorage";
 import { showSpinnerMenu } from "./spinner";
 
 export async function renderMainMenu() {
@@ -50,7 +50,6 @@ export async function renderMainMenu() {
 
   favoritenEl.forEach((cityEL) => {
     cityEL.addEventListener("click", () => {
-      
       const cityBox = cityEL.closest(".city-content");
       const cityId = cityBox.getAttribute("data-city-id");
       const cityName = cityBox.getAttribute("data-city-name");
