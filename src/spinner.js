@@ -1,6 +1,6 @@
 import { wearherAppEl } from "../main";
 
-export function showSpinner() {
+export function showSpinnerMenu() {
   wearherAppEl.innerHTML = laodingSpinnerHtml();
 }
 
@@ -18,10 +18,10 @@ export function laodingSpinnerHtml() {
 }
 
 export function showSpinnerCity(cityName) {
-  wearherAppEl.innerHTML = laodingSpinnerHtmlEl(cityName);
+  wearherAppEl.innerHTML = laodingSpinnerCity(cityName);
 }
 
-export function laodingSpinnerHtmlEl(cityName) {
+export function laodingSpinnerCity(cityName) {
   return `
       <div id="spinner" class="spinner">
           <div class="spinner-text">Lade Wetter  für ${cityName}</div>

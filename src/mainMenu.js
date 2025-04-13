@@ -3,10 +3,10 @@ import { handleCityData } from "./addCity";
 import { searchCityInAPI } from "./api";
 import { renderCity } from "./favoriten";
 import { removeCityLocalStorage } from "./localStorage";
-import { showSpinner } from "./spinner";
+import { showSpinnerMenu } from "./spinner";
 
 export async function renderMainMenu() {
-  showSpinner();
+  showSpinnerMenu();
 
   const favoritenCity = await renderCity();
 
@@ -50,6 +50,7 @@ export async function renderMainMenu() {
 
   favoritenEl.forEach((cityEL) => {
     cityEL.addEventListener("click", () => {
+      
       const cityBox = cityEL.closest(".city-content");
       const cityId = cityBox.getAttribute("data-city-id");
       const cityName = cityBox.getAttribute("data-city-name");
@@ -58,20 +59,18 @@ export async function renderMainMenu() {
     });
   });
 
-  //remove Btn function
-
   const removeButtons = document.querySelectorAll(".city-remove__Btn");
+
   removeButtons.forEach((btn) => {
     btn.addEventListener("click", function () {
       const cityBox = btn.closest(".city-content");
       const cityId = cityBox.getAttribute("data-city-id");
 
       removeCityLocalStorage(cityId);
-      renderMainMenu();
+      cityBox.remove();
     });
   });
 
-  //Edit btn
   const editBtn = document.querySelector(".header-app__nav-button");
 
   editBtn.addEventListener("click", function () {
@@ -118,6 +117,7 @@ function displayCities(citiesData, sugesstionsEl) {
   });
 
   const appEl = document.getElementById("app");
+
   appEl.addEventListener("click", function () {
     sugesstionsEl.classList.add("display");
   });

@@ -1,7 +1,7 @@
 import { wearherAppEl } from "../main";
 import { fetchWeatherData } from "./api";
 import { getConditionImagePath } from "./condition";
-import { saveToLocalStorage } from "./localStorage";
+import { getSavedCity, saveToLocalStorage } from "./localStorage";
 import { renderMainMenu } from "./mainMenu";
 import { showSpinnerCity } from "./spinner";
 
@@ -9,8 +9,9 @@ import { formattemperature, sunnHour } from "./utils";
 
 export async function handleCityData(cityId, cityName) {
   showSpinnerCity(cityName);
+
   const weatherData = await fetchWeatherData(cityId);
-  //TODU:5- city daten holen und verteilen
+
   console.log(weatherData);
 
   displayWeather(weatherData, cityId);
@@ -21,7 +22,6 @@ export async function handleCityData(cityId, cityName) {
   conditionImage(weatherData);
 }
 
-//TODU:6 richtige wetter situation uberprüfen und passende bild für hintergrund hinzufugen
 function conditionImage(data) {
   const containerEl = document.querySelector(".city-mainbox");
 
@@ -34,8 +34,6 @@ function conditionImage(data) {
     containerEl.style.backgroundImage = `linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(${containerImage})`;
   }
 }
-
-//TODU:7 -  alle city Wetter daten foront seite hinzüfugen
 
 function displayWeather(weatherData, cityId) {
   wearherAppEl.innerHTML = `
@@ -57,7 +55,6 @@ function displayWeather(weatherData, cityId) {
                   />
                 </svg>
             </div>
-
             <div class="city-buttons__favoriten">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +72,6 @@ function displayWeather(weatherData, cityId) {
                 </svg>
             </div>
         </div>
-
         <div class="create-city">
             <h2 class="create-city__title">${weatherData.location.name}</h2>
             <h1 class="create-city__temp" >${formattemperature(
@@ -93,7 +89,6 @@ function displayWeather(weatherData, cityId) {
                 }°</span>
             </div>
         </div>
-
         <div class="forecast-box">
           <div class="forecast-box__today">
             <p class="forecast-box__text">Heute ${
@@ -105,11 +100,9 @@ function displayWeather(weatherData, cityId) {
           </div>
           <div class="forecast-box__time"></div>
         </div>
-
         <div class="forecast-weekday">
           <p class="forecast-weekday__text" >Vorhersage für die nächsten 3 Tage:</p>
         </div>
-
         <div class="forecast-dayInfo"></div>
     </div>      
     `;
@@ -118,24 +111,28 @@ function displayWeather(weatherData, cityId) {
   const favoritenBtnEl = wearherAppEl.querySelector(".city-buttons__favoriten");
 
   returnBtnEl.addEventListener("click", returnMenu);
+
+  const savedCities = getSavedCity();
+
+  if (savedCities.includes(cityId)) {
+    favoritenBtnEl.style.display = "none";
+  }
+
   favoritenBtnEl.addEventListener("click", () => {
-    //Hier eine Überprüfung einfügen, ob die cityID schon im lokal Storage orhanden ist. Wenn ja, dann darf saveFavoriteCity nicht ausgeführt werden.
-    favoritenBtnEl.classList.add("favoritenDisplayEl");
     saveToLocalStorage(cityId, weatherData.location.name);
+    favoritenBtnEl.style.display = "none";
   });
 }
 
-//TODU:8- zurük zum haupmenu button Fn
 function returnMenu() {
   renderMainMenu();
 }
 
-//TODU:9- zeit einstellin EU zeit zone
 function gethours(weatherData) {
   const time = new Date(weatherData.location.localtime).getHours();
   return time;
 }
-//:10- 24 uhr zeit anzeige FN aber gits hier probleme
+
 function renderHours(weatherData) {
   const hour = gethours(weatherData);
 
@@ -176,7 +173,6 @@ function renderHours(weatherData) {
   }
 }
 
-//TODU:11- nechste 3 tagige wetter info anzeige Fn
 function renderNextThreeDays(weatherData) {
   for (let i = 0; i < 3; i++) {
     let day = weatherData.forecast.forecastday[i];
@@ -207,7 +203,6 @@ function renderNextThreeDays(weatherData) {
   }
 }
 
-//TUDO:12- astro info anzeige Fn
 function daysAstroInfo(weatherData) {
   const dayInfo = weatherData;
   const forecastDayEl = document.querySelector(".forecast-dayInfo");
