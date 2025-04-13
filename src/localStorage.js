@@ -16,3 +16,8 @@ export function saveToLocalStorage(cityId, cityName) {
 export function getSavedCity() {
   return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
 }
+
+export function removeCityLocalStorage(cityId) {
+  const savedCities = getSavedCity().filter((id) => id !== cityId);
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(savedCities));
+}

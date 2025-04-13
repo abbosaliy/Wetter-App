@@ -8,14 +8,17 @@
   display: flex;
   align-items: center;
   padding-left: 0.5rem;
-
   cursor: pointer;
   color: #f13c3c;
+
   &__Btn {
     color: #f13c3c;
     filter: drop-shadow(1px 1px 5px #000);
     width: 30px;
   }
+}
+.city-remove__display {
+  display: none;
 }
 
 .city-info {

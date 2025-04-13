@@ -2,6 +2,7 @@ import { wearherAppEl } from "../main";
 import { handleCityData } from "./addCity";
 import { searchCityInAPI } from "./api";
 import { renderCity } from "./favoriten";
+import { removeCityLocalStorage } from "./localStorage";
 import { showSpinner } from "./spinner";
 
 export async function renderMainMenu() {
@@ -50,16 +51,47 @@ export async function renderMainMenu() {
   favoritenEl.forEach((cityEL) => {
     cityEL.addEventListener("click", () => {
       const cityBox = cityEL.closest(".city-content");
-
-      if (!cityBox) {
-        console.warn("topilmadi");
-      }
       const cityId = cityBox.getAttribute("data-city-id");
       const cityName = cityBox.getAttribute("data-city-name");
 
-      console.log(cityId, cityName);
       handleCityData(cityId, cityName);
     });
+  });
+
+  //remove Btn function
+
+  const removeButtons = document.querySelectorAll(".city-remove__Btn");
+  removeButtons.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const cityBox = btn.closest(".city-content");
+      const cityId = cityBox.getAttribute("data-city-id");
+
+      removeCityLocalStorage(cityId);
+      renderMainMenu();
+    });
+  });
+
+  //Edit btn
+  const editBtn = document.querySelector(".header-app__nav-button");
+
+  editBtn.addEventListener("click", function () {
+    const isEditing = editBtn.textContent === "Bearbeiten";
+
+    const removeBtnDisplay = document.querySelectorAll(".city-remove__display");
+
+    if (isEditing) {
+      editBtn.textContent = "Fertig";
+
+      removeBtnDisplay.forEach((btn) => {
+        btn.style.display = "block";
+      });
+    } else {
+      editBtn.textContent = "Bearbeiten";
+
+      removeBtnDisplay.forEach((btn) => {
+        btn.style.display = "none";
+      });
+    }
   });
 }
 
@@ -77,7 +109,6 @@ function displayCities(citiesData, sugesstionsEl) {
 
     const cityName = index.name;
     const cityId = index.id;
-    console.log(cityName, cityId);
 
     sugesstionsEl.appendChild(cityListe);
 

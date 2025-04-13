@@ -14,7 +14,7 @@
     h2 {
       font-size: 2.5rem;
       color: $text-color;
-      font-weight: 300;
+      font-weight: 400;
     }
 
     &-button {
@@ -22,9 +22,12 @@
       font-size: 1.2rem;
       background: none;
       color: $text-color;
-      font-weight: 300;
+      font-weight: 500;
+      filter: drop-shadow(1px 1px 5px #000);
     }
   }
+
+ 
 
   &__search {
     margin-top: 1.5rem;
