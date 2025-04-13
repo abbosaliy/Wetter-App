@@ -27,19 +27,30 @@
     }
   }
 
- 
-
   &__search {
-    margin-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
+    padding-top: 1rem;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+
+    &-icon {
+      position: absolute;
+      left: 12px;
+      top: 60%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      color: gray;
+      pointer-events: none;
+    }
 
     &-input {
-      padding: 0.7rem;
+      width: 100%;
+      padding: 10px 10px 10px 40px; /* chap tomonda icon uchun joy */
       border-radius: $border;
-      border: none;
-      font-size: 1rem;
-      color: black;
+      border: 1px solid #ccc;
+      font-size: 16px;
 
       &::placeholder {
         color: gray;

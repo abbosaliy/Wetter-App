@@ -112,7 +112,9 @@ function displayWeather(weatherData, cityId) {
 
   const savedCities = getSavedCity();
 
-  if (savedCities.includes(cityId)) {
+  const isSaved = savedCities.find((savedId) => savedId === String(cityId));
+
+  if (isSaved) {
     favoritenBtnEl.style.display = "none";
   }
 
@@ -172,7 +174,6 @@ function renderHours(weatherData) {
 }
 
 function renderNextThreeDays(weatherData) {
-  
   for (let i = 0; i < 3; i++) {
     let day = weatherData.forecast.forecastday[i];
     let data = new Date(day.date);
