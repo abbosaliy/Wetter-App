@@ -37,7 +37,7 @@
     &-icon {
       position: absolute;
       left: 12px;
-      top: 60%;
+      top: 65%;
       transform: translateY(-50%);
       width: 20px;
       height: 20px;
@@ -51,7 +51,6 @@
       border-radius: $border;
       border: 1px solid #ccc;
       font-size: 16px;
-
       &::placeholder {
         color: gray;
       }

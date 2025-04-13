@@ -2,7 +2,7 @@ import { wearherAppEl } from "../main";
 import { handleCityData } from "./addCity";
 import { searchCityInAPI } from "./api";
 import { renderCity } from "./favoriten";
-import { getSavedCity, removeCityLocalStorage } from "./localStorage";
+import { removeCityLocalStorage } from "./localStorage";
 import { showSpinnerMenu } from "./spinner";
 
 export async function renderMainMenu() {
