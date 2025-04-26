@@ -1,203 +1,206 @@
-@use "variables" as *;
+@use 'variables' as *;
 
 .city-buttons {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 1rem;
 
-  &__return {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    filter: drop-shadow(1px 1px 5px #000);
-  }
+	&__return {
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
+		filter: drop-shadow(1px 1px 5px #000);
+	}
 
-  &__favoriten {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    filter: drop-shadow(1px 1px 5px #000);
-  }
+	&__favoriten {
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
+		filter: drop-shadow(1px 1px 5px #000);
+	}
 }
-
+.city-container {
+	background: linear-gradient(linear-gradient(0deg, #0003, #0003));
+	position: sticky;
+	background-position: center;
+	background-size: cover;
+	background-attachment: fixed;
+}
 .city-mainbox {
-  padding: 1rem;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(linear-gradient(0deg, #0003, #0003));
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+	height: 100vh;
+	overflow-y: auto;
+	padding: 1rem;
+	height: 100%;
 }
 
 .favoriten-text {
-  padding-left: 1rem;
+	padding-left: 1rem;
 }
 
 .favoriten-cities__liste {
-  display: flex;
-  flex-direction: column-reverse;
+	display: flex;
+	flex-direction: column-reverse;
 }
 
 .create-city {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 4rem;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 4rem;
 
-  &__title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    font-weight: 300;
-  }
+	&__title {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 3rem;
+		font-weight: 300;
+	}
 
-  &__temp {
-    font-size: 4.5rem;
-    font-weight: 200;
-  }
+	&__temp {
+		font-size: 4.5rem;
+		font-weight: 200;
+	}
 
-  &__temperature {
-    margin-top: 0.5rem;
-    display: flex;
-    gap: 0.4rem;
-  }
+	&__temperature {
+		margin-top: 0.5rem;
+		display: flex;
+		gap: 0.4rem;
+	}
 }
 
 .forecast-box {
-  width: 100%;
-  border-radius: 6px;
-  margin-top: 3rem;
-  padding: 1.5rem;
-  display: flex;
-  backdrop-filter: blur(50px);
-  flex-direction: column;
-  box-shadow: 1px 1px 5px #0000004d;
+	width: 100%;
+	border-radius: 6px;
+	margin-top: 3rem;
+	padding: 1.5rem;
+	display: flex;
+	backdrop-filter: blur(50px);
+	flex-direction: column;
+	box-shadow: 1px 1px 5px #0000004d;
 
-  &__today {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-    font-size: 15px;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  }
+	&__today {
+		display: flex;
+		gap: 1rem;
+		align-items: flex-start;
+		font-size: 15px;
+		padding-bottom: 1rem;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+	}
 
-  &__text {
-    font-size: 1rem;
-  }
-  &__time {
-    display: flex;
-    align-items: center;
-    overflow-x: scroll;
-    margin-top: 1rem;
-    gap: 0.5rem;
-  }
+	&__text {
+		font-size: 1rem;
+	}
+	&__time {
+		display: flex;
+		align-items: center;
+		overflow-x: scroll;
+		margin-top: 1rem;
+		gap: 0.5rem;
+	}
 
-  &__time::-webkit-scrollbar {
-    display: none;
-  }
+	&__time::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .hour-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  gap: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 1.5rem;
+	gap: 0.5rem;
 
-  &__hour {
-    display: flex;
-  }
+	&__hour {
+		display: flex;
+	}
 }
 
 .forecast-weekday {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  backdrop-filter: blur(50px);
-  box-shadow: 1px 1px 5px #0000004d;
-  border-radius: 6px;
-  margin-top: 2rem;
-  padding: 1.5rem;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	backdrop-filter: blur(50px);
+	box-shadow: 1px 1px 5px #0000004d;
+	border-radius: 6px;
+	margin-top: 2rem;
+	padding: 1.5rem;
 
-  &__text {
-    font-size: 1rem;
-  }
+	&__text {
+		font-size: 1rem;
+	}
 }
 
 .weekday-box {
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  display: flex;
-  margin-top: 1rem;
-  flex-direction: column;
-  align-items: flex-start;
+	border-top: 1px solid rgba(255, 255, 255, 0.2);
+	display: flex;
+	margin-top: 1rem;
+	flex-direction: column;
+	align-items: flex-start;
 
-  &__info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-  }
+	&__info {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+	}
 
-  &__icon {
-    width: 40px;
-    height: 40px;
-  }
+	&__icon {
+		width: 40px;
+		height: 40px;
+	}
 }
 
 .forecast-dayInfo {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 2rem;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	margin-top: 2rem;
 }
 
 .weather-footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1.5rem;
 
-  &__left {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-    gap: 1.5rem;
-    backdrop-filter: blur(50px);
-    border-radius: $border;
-    box-shadow: $box-shadow;
+	&__left {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 1rem;
+		gap: 1.5rem;
+		backdrop-filter: blur(50px);
+		border-radius: $border;
+		box-shadow: $box-shadow;
 
-    &-text {
-      font-size: 1.2rem;
-    }
+		&-text {
+			font-size: 1.2rem;
+		}
 
-    &-info {
-      font-size: 1.3rem;
-    }
-  }
+		&-info {
+			font-size: 1.3rem;
+		}
+	}
 
-  &__right {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem;
-    gap: 1.5rem;
-    backdrop-filter: blur(50px);
+	&__right {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 1rem;
+		gap: 1.5rem;
+		backdrop-filter: blur(50px);
 
-    border-radius: $border;
-    box-shadow: $box-shadow;
+		border-radius: $border;
+		box-shadow: $box-shadow;
 
-    &-text {
-      font-size: 1.2rem;
-    }
+		&-text {
+			font-size: 1.2rem;
+		}
 
-    &-info {
-      font-size: 1.3rem;
-    }
-  }
+		&-info {
+			font-size: 1.3rem;
+		}
+	}
 }
