@@ -1,4 +1,4 @@
-@use "variables" as *;
+@use 'variables' as *;
 
 .header-app {
   display: flex;
@@ -24,6 +24,7 @@
       color: $text-color;
       font-weight: 500;
       filter: drop-shadow(1px 1px 5px #000);
+      cursor: pointer;
     }
   }
 
